@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <title>InstagramCloneApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#"><p style = "font-family:forte; font-size:40px;">Instagram</p></a>
+  
+  <!-- Links -->
+  
+  <ul class="nav navbar-nav ml-auto">
+  <% if user_signed_in? %>
+    <li class="nav-item">
+    <%= link_to 'Sign Out', destroy_user_session_path, class: "btn btn-danger ", method: :delete %>
+    <%= link_to 'See favorite posts', favorites_path, class: "btn btn-info " %>
+    </li>
+    <% else%>
+    <li class="nav-item">
+      <%= link_to 'sign_up', new_user_registration_path, class: "btn btn-info " %>
+    </li>
+    <li class="nav-item">
+      <i class="fas fa-cloud"></i>
+      <%= link_to 'sign_in', new_user_session_path, class: "btn btn-primary " %>
+    </li>
+    </li>
+    <li class="nav-item">
+      <i class="fas fa-cloud"></i>
+      
+    </li>
+    <% end %>
+    <%= link_to 'Home', root_path, class: "btn btn-primary " %>
+  </ul>
+</nav>
+
+<% if user_signed_in? %>
+  
+  <% if current_user.profile == nil %>
+    <p><%= image_tag 'pro4.png', class:"rounded-circle" %></p>
+    <%= link_to 'upload a profile picture', new_profile_path, class: "btn btn-success " %>
+  
+  <% else %>
+  <% if current_user.profile.image? %>         
+  
+    <p><%= image_tag current_user.profile.image.url, class:"rounded-circle" %></p>
+      
+    <%= link_to 'Edit Profile picture', edit_profile_path(current_user), class: "btn btn-success " %>
+   <% end %> 
+  <% end %>
+<% end %>
+    <%= yield %>
+    <footer>
+      <p>Developped by: Marguerite</p>
+      <p>Contact information: <a href="https://mail.google.com/mail/u/0/?hl=en#inbox"> mumarg2015@@gmail.com</a>.</p>
+    </footer>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
